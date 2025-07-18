@@ -181,3 +181,17 @@ if __name__ == '__main__':
         except Exception as e:
             print(f"❌ Bot crashed with error: {e}")
             time.sleep(5)
+from flask import Flask
+import threading
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot is alive!"
+
+def run_web_server():
+    app.run(host='0.0.0.0', port=8080)
+
+# Start Flask server in parallel
+threading.Thread(target=run_web_server).start()
