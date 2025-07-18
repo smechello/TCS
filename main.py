@@ -170,6 +170,8 @@ def main():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_message))
     dp.add_handler(CallbackQueryHandler(button_handler))
+    # Start Flask server in parallel
+    threading.Thread(target=run_web_server).start()
     updater.start_polling()
     updater.idle()
 
@@ -193,5 +195,4 @@ def home():
 def run_web_server():
     app.run(host='0.0.0.0', port=8080)
 
-# Start Flask server in parallel
-threading.Thread(target=run_web_server).start()
+
